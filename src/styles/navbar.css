@@ -1,0 +1,19 @@
+.left-side {
+    background: #3E464F;
+    width: 250px;
+    height: 100vh;
+}
+
+a {
+    display: inline-block;
+    font-size: 20px;
+    text-align: center;
+    padding: 10px 0;
+    color: #D7D4D6;
+    text-decoration: none;
+    width: 100%;
+}
+
+a:hover {
+    background: #273039;
+}
