@@ -1,0 +1,32 @@
+.page-management {
+    width: clamp(500px, 60vw, 1000px);
+    margin: 30px auto;
+}
+
+h2 {
+    font-size: 30px;
+    margin-bottom: 50px;
+    color: var(--anthraciteHover);
+    text-align: center;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .5);
+}
+
+th, td {
+    /* border: 1px solid var(--anthraciteHover); */
+    padding: 10px;
+    text-align: center;
+}
+
+tr:nth-child(even) {
+    background: #f0f0f0;
+}
+
+thead {
+    background-color: var(--anthracite);
+    color: var(--text);
+}
