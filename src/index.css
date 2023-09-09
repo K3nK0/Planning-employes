@@ -1,3 +1,9 @@
+:root {
+  --anthracite: #3E464F;
+  --anthraciteHover: #273039;
+  --text: #D7D4D6;
+}
+
 *, ::before, ::after {
   box-sizing: border-box;
   padding: 0;

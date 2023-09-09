@@ -1,19 +1,20 @@
 .left-side {
-    background: #3E464F;
+    background: var(--anthracite);
     width: 250px;
     height: 100vh;
 }
 
 a {
     display: inline-block;
+    width: 100%;
     font-size: 20px;
     text-align: center;
     padding: 10px 0;
-    color: #D7D4D6;
+    color: var(--text);
     text-decoration: none;
-    width: 100%;
+    border-bottom: 1px solid var(--anthraciteHover);
 }
 
 a:hover {
-    background: #273039;
+    background: var(--anthraciteHover);
 }
