@@ -1,3 +1,69 @@
 .container-full {
   display: flex;
 }
+
+.modal-add-employee {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  background: rgba(0, 0, 0, .6);
+}
+
+h3 {
+  font-size: 22px;
+  margin-bottom: 26px;
+  color: var(--anthraciteHover);
+  text-align: center;
+}
+
+.form-add-employee {
+  position: relative;
+  min-width: 400px;
+  background: var(--text);
+  padding: 30px;
+  border-radius: 8px;
+}
+
+.traverser {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 26px;
+  gap: 2px;
+}
+
+label {
+  font-size: 18px;
+}
+
+input {
+  font-size: 18px;
+  padding: 8px;
+  border: none;
+  border-bottom: 1px solid var(--anthracite);
+  background: transparent;
+}
+
+.btn-send {
+  width: 100%;
+  padding: 8px;
+  background: var(--anthracite);
+  color: var(--text);
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn-send:hover {
+  background: var(--anthraciteHover);
+}

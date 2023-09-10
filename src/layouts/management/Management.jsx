@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react"
+import { createPortal } from "react-dom";
 import { collection, getDocs } from "firebase/firestore";
 
 import Employee from "./Employee"
 import {db} from "../../config/firebase"
 
 import "../../styles/management.css"
+import ModalAddEmployee from "./ModalAddEmployee";
 
 export default function Management() {
+
+  const [showModalAddEmployee, setShowModalAddEmployee] = useState(false)
 
   const [listEmployees, setListEmployees] = useState()
 
@@ -25,7 +29,9 @@ export default function Management() {
   return (
     <main className="page-management">
       <h2>Gestion des employés</h2>
-      <button className="btn-add-employee">Ajouter un employé</button>
+      <button 
+      onClick={() => setShowModalAddEmployee(true)}
+      className="btn-add-employee">Ajouter un employé</button>
       <table>
         <thead>
           <tr>
@@ -45,6 +51,9 @@ export default function Management() {
         </tbody>
 
       </table>
+
+      {showModalAddEmployee && createPortal(<ModalAddEmployee closeModalAddEmployee={() => setShowModalAddEmployee(false)} getEmployees={getEmployees} />, document.body)}
+
     </main>
   )
 }

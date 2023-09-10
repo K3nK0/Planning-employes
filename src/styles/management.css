@@ -13,11 +13,12 @@ h2 {
 table {
     width: 100%;
     border-collapse: collapse;
+    border-radius: 5px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, .5);
+    overflow: hidden;
 }
 
 th, td {
-    /* border: 1px solid var(--anthraciteHover); */
     padding: 10px;
     text-align: center;
 }
@@ -29,4 +30,20 @@ tr:nth-child(even) {
 thead {
     background-color: var(--anthracite);
     color: var(--text);
+}
+
+.btn-add-employee {
+    background: var(--anthracite);
+    font-size: 18px;
+    color: var(--text);
+    padding: 10px 15px;
+    border: none;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .5);
+}
+
+.btn-add-employee:hover {
+    background: var(--anthraciteHover);
 }
