@@ -40,10 +40,10 @@ export default function ModalAddEmployee({closeModalAddEmployee, getEmployees}) 
     }
 
   return (
-    <div className="modal-add-employee">
+    <div className="modal">
         <form 
         onSubmit={handleSubmit}
-        className="form-add-employee">
+        className="container-modal">
             <h3>Renseigner un nouvel employé</h3>
             <div className="input">
                 <label htmlFor="name">Prénom</label>

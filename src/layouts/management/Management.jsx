@@ -39,7 +39,6 @@ export default function Management() {
             <th>estimation d'heures</th>
             <th>heures à faire</th>
             <th></th>
-            <th></th>
           </tr>
         </thead>
         <tbody>

@@ -2,7 +2,7 @@
   display: flex;
 }
 
-.modal-add-employee {
+.modal {
   position: fixed;
   inset: 0;
   display: grid;
@@ -17,7 +17,7 @@ h3 {
   text-align: center;
 }
 
-.form-add-employee {
+.container-modal {
   position: relative;
   min-width: 400px;
   background: var(--text);
@@ -66,4 +66,27 @@ input {
 
 .btn-send:hover {
   background: var(--anthraciteHover);
+}
+
+.container-btns-choice {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.btn-valid {
+  background: var(--anthracite);
+}
+
+.btn-delete {
+  background: var(--btnDelete);
+}
+
+.btn-valid, .btn-delete {
+  font-weight: 600;
+  color: var(--text);
+  padding: 8px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
