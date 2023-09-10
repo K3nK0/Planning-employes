@@ -1,30 +1,28 @@
+import "../../styles/management.css"
+
 import { useEffect, useState } from "react"
 import { createPortal } from "react-dom";
-import { collection, getDocs } from "firebase/firestore";
 
 import Employee from "./Employee"
-import {db} from "../../config/firebase"
-
-import "../../styles/management.css"
 import ModalAddEmployee from "./ModalAddEmployee";
+
+import { collection, getDocs } from "firebase/firestore";
+import {db} from "../../config/firebase"
 
 export default function Management() {
 
   const [showModalAddEmployee, setShowModalAddEmployee] = useState(false)
-
   const [listEmployees, setListEmployees] = useState()
 
   const getEmployees = async () => {
     const querySnapshot = await getDocs(collection(db, "employees"));
     const employees = querySnapshot.docs.map(doc => ({id: doc.id, ...doc.data()}))
-    // console.log("employées",employees);
-
     setListEmployees(employees)
   }
 
   useEffect(() => {
     getEmployees()
-  }, [])
+  }, [listEmployees]);
 
   return (
     <main className="page-management">

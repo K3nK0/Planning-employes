@@ -4,7 +4,7 @@ import { useState } from "react"
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../config/firebase";
 
-export default function ModalAddEmployee({closeModalAddEmployee, getEmployees}) {
+export default function ModalAddEmployee({closeModalAddEmployee}) {
 
     const [addEmployee, setAddEmployee] = useState({
         name: "",
@@ -36,7 +36,6 @@ export default function ModalAddEmployee({closeModalAddEmployee, getEmployees}) 
         })
 
         closeModalAddEmployee()
-        getEmployees()
     }
 
   return (
