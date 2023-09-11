@@ -1,10 +1,15 @@
 import traverser from "../../assets/traverser.svg"
 import { useState } from "react"
+import { useDispatch } from "react-redux";
 
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../config/firebase";
+import { setListEmployees } from "../../features/listEmployees";
+import { getEmployees } from "../../utils/getEmpoyees";
 
 export default function ModalAddEmployee({closeModalAddEmployee}) {
+
+    const dispatch = useDispatch()
 
     const [addEmployee, setAddEmployee] = useState({
         name: "",
@@ -28,6 +33,7 @@ export default function ModalAddEmployee({closeModalAddEmployee}) {
         } catch (err) {
             console.log(err);
         }
+        getEmployees(dispatch, setListEmployees)
 
         setAddEmployee({
             name: "",

@@ -2,6 +2,9 @@ import "../../styles/management.css"
 
 import { useEffect, useState } from "react"
 import { createPortal } from "react-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setListEmployees } from "../../features/listEmployees";
+import { getEmployees } from "../../utils/getEmpoyees";
 
 import Employee from "./Employee"
 import ModalAddEmployee from "./ModalAddEmployee";
@@ -11,18 +14,20 @@ import {db} from "../../config/firebase"
 
 export default function Management() {
 
-  const [showModalAddEmployee, setShowModalAddEmployee] = useState(false)
-  const [listEmployees, setListEmployees] = useState()
+  const dispatch = useDispatch()
 
-  const getEmployees = async () => {
-    const querySnapshot = await getDocs(collection(db, "employees"));
-    const employees = querySnapshot.docs.map(doc => ({id: doc.id, ...doc.data()}))
-    setListEmployees(employees)
-  }
+  const [showModalAddEmployee, setShowModalAddEmployee] = useState(false)
+  const listEmployees = useSelector(state => state.listEmployees)
+
+  // const getEmployees = async () => {
+  //   const querySnapshot = await getDocs(collection(db, "employees"));
+  //   const employees = querySnapshot.docs.map(doc => ({id: doc.id, ...doc.data()}))
+  //   dispatch(setListEmployees(employees))
+  // };
 
   useEffect(() => {
-    getEmployees()
-  }, [listEmployees]);
+    getEmployees(dispatch, setListEmployees)
+  }, []);
 
   return (
     <main className="page-management">

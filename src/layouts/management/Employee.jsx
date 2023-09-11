@@ -5,6 +5,7 @@ import ModalDeleteEmployee from "./ModalDeleteEmployee"
 import ModalUpdateEmployee from "./ModalUpdateEmployee"
 
 export default function Employee({employee}) {
+  // console.log("emplyé", employee);
 
   const [showModalDeleteEmployee, setShowModalDeleteEmployee] = useState(false)
   const [showModalUpdateEmployee, setShowModalUpdateEmployee] = useState(false)

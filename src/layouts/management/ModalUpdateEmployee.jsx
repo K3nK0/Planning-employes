@@ -1,9 +1,14 @@
-import { doc, setDoc } from "firebase/firestore"
+import { useDispatch } from "react-redux"
+
+import { doc, updateDoc } from "firebase/firestore"
 import { db } from "../../config/firebase"
 
 import { useState } from "react"
+import { updateStateEmployee } from "../../features/listEmployees"
 
 export default function ModalUpdateEmployee({employee, closeModal}) {
+
+    const dispatch = useDispatch()
 
     const [updateEmployee, setUpdateEmployee] = useState({
         ...employee
@@ -13,14 +18,14 @@ export default function ModalUpdateEmployee({employee, closeModal}) {
         e.preventDefault()
 
         const employeeUpdate = {
+            id: updateEmployee.id,
             name: updateEmployee.name,
             hoursToDo: updateEmployee.hoursToDo,
             estimatedHours: updateEmployee.estimatedHours
         }
 
-        await setDoc(doc(db, "employees", employee.id), {
-            ...employeeUpdate
-          });
+        await updateDoc(doc(db, "employees", employee.id), employeeUpdate);
+        dispatch(updateStateEmployee(employeeUpdate))
 
         closeModal()
     }

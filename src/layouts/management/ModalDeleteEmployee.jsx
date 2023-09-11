@@ -1,10 +1,16 @@
+import { useDispatch } from "react-redux";
+
 import { doc, deleteDoc } from "firebase/firestore";
 import { db } from "../../config/firebase";
+import { deleteEmployee } from "../../features/listEmployees";
 
 export default function ModalDeleteEmployee({employee, closeModal}) {
 
+    const dispatch = useDispatch()
+
     const handleDelete = id => {
         deleteDoc(doc(db, "employees", id))
+        dispatch(deleteEmployee(id))
         closeModal()
     }
 
