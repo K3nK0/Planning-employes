@@ -23,7 +23,8 @@ export default function ModalAddEmployee({closeModalAddEmployee}) {
         const employee = {
             name: addEmployee.name,
             hoursToDo: addEmployee.hoursToDo,
-            estimatedHours: 0
+            estimatedHours: 0,
+            events: []
         }
 
         try {

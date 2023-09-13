@@ -32,7 +32,7 @@ thead {
     color: var(--text);
 }
 
-.btn-add-employee {
+.btn-add-employee, .btn-add-event {
     background: var(--anthracite);
     font-size: 18px;
     color: var(--text);
@@ -44,6 +44,6 @@ thead {
     box-shadow: 0 5px 10px rgba(0, 0, 0, .5);
 }
 
-.btn-add-employee:hover {
+.btn-add-employee:hover, .btn-add-event:hover {
     background: var(--anthraciteHover);
 }

@@ -1,0 +1,17 @@
+.container-profile {
+    height: 100%;
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+    gap: 20px;
+    padding: 20px;
+}
+
+.container-profile h2 {
+    margin-bottom: 0;
+}
+
+.info-employee {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
