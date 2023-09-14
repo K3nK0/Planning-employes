@@ -1,10 +1,9 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux";
-import { doc, updateDoc } from "firebase/firestore"; 
+import { collection, addDoc } from "firebase/firestore"; 
 import { db } from "../config/firebase";
-import { arrayUnion } from "firebase/firestore";
 import { addEventState } from "../features/listEmployees";
-import {nanoid} from "nanoid"
+import { getEventsEmployee } from "../utils/getEmpoyees";
 
 
 export default function ModalAddClickEvent({event, employee, closeModal, setNewAddEvent}) {
@@ -21,21 +20,20 @@ export default function ModalAddClickEvent({event, employee, closeModal, setNewA
         e.preventDefault()
 
         const addEvent = {
-            id: nanoid(),
             title: newEvent.title,
             start: newEvent.start,
             end: newEvent.end
         }
 
         try {
-            await updateDoc(doc(db,"employees", employee.id), {
-                events: arrayUnion(addEvent)
+            await addDoc(collection(db,"employees", employee.id, "events"), {
+                ...addEvent
             })
         } catch (err) {
             console.log("error addClickEvent", err);
         }
 
-        dispatch(addEventState({"employee":employee.id, "event":addEvent}))
+        getEventsEmployee(dispatch, addEventState, employee.id)
 
         setNewEvent({
             title: "",
@@ -68,6 +66,7 @@ export default function ModalAddClickEvent({event, employee, closeModal, setNewA
             onChange={e => setNewEvent({...newEvent, title: e.target.value})}
             />
         </div>
+
         <div className="container-btns-choice">
                 <button
                 className='btn-valid'

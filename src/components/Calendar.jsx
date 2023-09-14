@@ -1,13 +1,26 @@
-import React from 'react'
+import { useState } from 'react'
+import { createPortal } from "react-dom";
+
 import FullCalendar from "@fullcalendar/react"
 import dayGridPlugin from "@fullcalendar/daygrid"
 import timeGridPlugin from "@fullcalendar/timegrid"
 import interactionPlugin from "@fullcalendar/interaction"
-import { createPortal } from "react-dom";
+
+import { doc, updateDoc } from "firebase/firestore"; 
+import { db } from "../config/firebase";
+
 import ModalAddClickEvent from './ModalAddClickEvent'
-import { useState } from 'react'
+import { handleUpdateEvent } from '../features/listEmployees';
+
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function Calendar({employee}) {
+
+  const dispatch = useDispatch()
+
+  const listEmployees = useSelector(state => state.listEmployees)
+  const currentEmployee = listEmployees.find(employeeState => employeeState.id === employee.id)
+  const listEvents = currentEmployee.eventsState
 
   const [showModalAddClickEvent, setShowModalAddClickEvent] = useState(false)
   const [newAddEvent, setNewAddEvent] = useState({
@@ -16,18 +29,32 @@ export default function Calendar({employee}) {
   })
 
   const handleSelect = (info) => {
-    // console.log("info",info);
     const event = {
       start: info.startStr,
       end: info.endStr
     }
 
     setNewAddEvent(event)
-    console.log(newAddEvent);
-
     setShowModalAddClickEvent(true)
-    console.log(showModalAddClickEvent);
+  }
 
+  const handleEventResize = async (info) => {
+    const updateEvent = {
+      id: info.event.id,
+      title: info.event.title,
+      start: info.event.startStr,
+      end: info.event.endStr
+    }
+
+    try {
+      await updateDoc(doc(db,"employees", employee.id, "events", updateEvent.id), {
+        "end": updateEvent.end
+      })
+    } catch (err) {
+        console.log("error eventResize", err);
+    }
+
+    dispatch(handleUpdateEvent({"employeeId": employee.id, "event": updateEvent}))
   }
 
   return (
@@ -47,9 +74,10 @@ export default function Calendar({employee}) {
           locale = "frLocale"
           firstDay = "1"
           weekNumbers = "true"
-          events = {employee.events}
+          events = {listEvents}
           selectable = "true"
           select={handleSelect}
+          eventResize={handleEventResize}
       />
       {showModalAddClickEvent && createPortal(<ModalAddClickEvent closeModal={() => setShowModalAddClickEvent(false)} event={newAddEvent} setNewAddEvent={setNewAddEvent} employee={employee} />, document.body)}
      </>

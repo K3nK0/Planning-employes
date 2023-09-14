@@ -24,7 +24,7 @@ export default function ModalAddEmployee({closeModalAddEmployee}) {
             name: addEmployee.name,
             hoursToDo: addEmployee.hoursToDo,
             estimatedHours: 0,
-            events: []
+            eventState: []
         }
 
         try {

@@ -12,6 +12,8 @@ export default function Profile() {
   const listEmployees = useSelector(state => state.listEmployees)
   const currentEmployee = listEmployees.find(employee => employee.id === params.id)
 
+  // console.log("list employee",currentEmployee);
+
   return (
     <div className="container-profile">
 

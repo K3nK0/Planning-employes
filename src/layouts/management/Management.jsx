@@ -9,9 +9,6 @@ import { getEmployees } from "../../utils/getEmpoyees";
 import Employee from "./Employee"
 import ModalAddEmployee from "./ModalAddEmployee";
 
-import { collection, getDocs } from "firebase/firestore";
-import {db} from "../../config/firebase"
-
 export default function Management() {
 
   const dispatch = useDispatch()
@@ -19,14 +16,8 @@ export default function Management() {
   const [showModalAddEmployee, setShowModalAddEmployee] = useState(false)
   const listEmployees = useSelector(state => state.listEmployees)
 
-  // const getEmployees = async () => {
-  //   const querySnapshot = await getDocs(collection(db, "employees"));
-  //   const employees = querySnapshot.docs.map(doc => ({id: doc.id, ...doc.data()}))
-  //   dispatch(setListEmployees(employees))
-  // };
-
   useEffect(() => {
-    getEmployees(dispatch, setListEmployees)
+    getEmployees(dispatch, setListEmployees);
   }, []);
 
   return (

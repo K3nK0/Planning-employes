@@ -21,10 +21,27 @@ export const listEmployees = createSlice({
         },
         addEventState: (state, {payload}) => {
           const currentEmployee = state.find(employeeState => employeeState.id === payload.employee)
-          currentEmployee.events.push(payload.event)
+          if(payload.events.length !== undefined){
+            payload.events.forEach(event => {
+              currentEmployee.eventsState.push(event)
+            })
+          }
+          else {
+            currentEmployee.eventsState.push(payload.events)
+          }
+          
+        },
+        handleUpdateEvent: (state, {payload}) => {
+          const findEmployee = state.find(employee => employee.id === payload.employeeId)
+
+          const updateEvent = findEmployee.eventsState.find(event => event.id === payload.event.id)
+          
+          updateEvent.start = payload.event.start
+          updateEvent.end = payload.event.end
+
         }
     }
 })
 
-export const {setListEmployees, deleteEmployee, updateStateEmployee, addEventState} = listEmployees.actions
+export const {setListEmployees, deleteEmployee, updateStateEmployee, addEventState, handleUpdateEvent} = listEmployees.actions
 export default listEmployees.reducer
