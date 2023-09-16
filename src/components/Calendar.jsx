@@ -13,6 +13,7 @@ import ModalAddClickEvent from './ModalAddClickEvent'
 import { handleUpdateEvent } from '../features/listEmployees';
 
 import { useDispatch, useSelector } from 'react-redux';
+import ModalDeleteEvent from './ModalDeleteEvent';
 
 export default function Calendar({employee}) {
 
@@ -22,6 +23,7 @@ export default function Calendar({employee}) {
   const currentEmployee = listEmployees.find(employeeState => employeeState.id === employee.id)
   const listEvents = currentEmployee.eventsState
 
+  const [showModalDeleteEvent, setShowModalDeleteEvent] = useState(false)
   const [showModalAddClickEvent, setShowModalAddClickEvent] = useState(false)
   const [newAddEvent, setNewAddEvent] = useState({
     start: "",
@@ -36,6 +38,20 @@ export default function Calendar({employee}) {
 
     setNewAddEvent(event)
     setShowModalAddClickEvent(true)
+  }
+
+  const [deleteEvent, setDeleteEvent] = useState({
+    eventID: "",
+    employeeID: ""
+  })
+
+  const handleEventClick = (info) => {
+    setDeleteEvent({
+      eventID: info.event.id,
+      employeeID: currentEmployee.id
+    })
+    
+    setShowModalDeleteEvent(true)
   }
 
   const handleEventResize = async (info) => {
@@ -78,8 +94,20 @@ export default function Calendar({employee}) {
           selectable = "true"
           select={handleSelect}
           eventResize={handleEventResize}
+          eventClick={handleEventClick}
       />
-      {showModalAddClickEvent && createPortal(<ModalAddClickEvent closeModal={() => setShowModalAddClickEvent(false)} event={newAddEvent} setNewAddEvent={setNewAddEvent} employee={employee} />, document.body)}
+      {showModalAddClickEvent && createPortal(<ModalAddClickEvent 
+      closeModal={() => setShowModalAddClickEvent(false)} 
+      event={newAddEvent} 
+      setNewAddEvent={setNewAddEvent} 
+      employee={employee} 
+      />, document.body)}
+
+      {showModalDeleteEvent && createPortal(<ModalDeleteEvent 
+      closeModal={() => setShowModalDeleteEvent(false)} 
+      deleteEvent={deleteEvent} 
+      setDeleteEvent={setDeleteEvent} 
+      />, document.body)}
      </>
   )
 }

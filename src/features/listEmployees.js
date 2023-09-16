@@ -39,9 +39,17 @@ export const listEmployees = createSlice({
           updateEvent.start = payload.event.start
           updateEvent.end = payload.event.end
 
+        },
+        deleteEventState: (state, {payload}) => {
+          
+          const currentEmployee = state.find(employee => employee.id === payload.employeeID)
+
+          const indexEvent = currentEmployee.eventsState.findIndex(event => event.id === payload.eventID)
+
+          currentEmployee.eventsState.splice(indexEvent, 1)
         }
     }
 })
 
-export const {setListEmployees, deleteEmployee, updateStateEmployee, addEventState, handleUpdateEvent} = listEmployees.actions
+export const {setListEmployees, deleteEmployee, updateStateEmployee, addEventState, handleUpdateEvent, deleteEventState} = listEmployees.actions
 export default listEmployees.reducer
