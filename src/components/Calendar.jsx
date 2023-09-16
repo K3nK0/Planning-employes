@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { createPortal } from "react-dom";
 
 import FullCalendar from "@fullcalendar/react"
@@ -11,6 +11,7 @@ import { db } from "../config/firebase";
 
 import ModalAddClickEvent from './ModalAddClickEvent'
 import { handleUpdateEvent } from '../features/listEmployees';
+import getHoursCalculate from '../utils/getHoursCalculate';
 
 import { useDispatch, useSelector } from 'react-redux';
 import ModalDeleteEvent from './ModalDeleteEvent';
@@ -29,6 +30,10 @@ export default function Calendar({employee}) {
     start: "",
     end: ""
   })
+
+  useEffect(() => {
+    getHoursCalculate(dispatch, employee);
+  }, [listEmployees]); 
 
   const handleSelect = (info) => {
     const event = {
@@ -71,6 +76,7 @@ export default function Calendar({employee}) {
     }
 
     dispatch(handleUpdateEvent({"employeeId": employee.id, "event": updateEvent}))
+    // getHoursCalculate(dispatch, employee)
   }
 
   return (

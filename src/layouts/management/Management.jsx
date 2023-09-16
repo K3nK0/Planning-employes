@@ -8,6 +8,7 @@ import { getEmployees } from "../../utils/getEmpoyees";
 
 import Employee from "./Employee"
 import ModalAddEmployee from "./ModalAddEmployee";
+import getHoursCalculate from "../../utils/getHoursCalculate";
 
 export default function Management() {
 
@@ -19,6 +20,13 @@ export default function Management() {
   useEffect(() => {
     getEmployees(dispatch, setListEmployees);
   }, []);
+
+  useEffect(() => {
+    listEmployees.forEach(employee => {
+      getHoursCalculate(dispatch, employee)
+    })
+    
+  }, [listEmployees])
 
   return (
     <main className="page-management">

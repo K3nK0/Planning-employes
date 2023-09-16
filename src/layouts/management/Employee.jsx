@@ -3,10 +3,20 @@ import "../../styles/employee.css"
 import { createPortal } from "react-dom"
 import ModalDeleteEmployee from "./ModalDeleteEmployee"
 import ModalUpdateEmployee from "./ModalUpdateEmployee"
+import { formatHour } from "../../utils/formatHour"
+import { useEffect } from "react"
+import getHoursCalculate from "../../utils/getHoursCalculate"
+import { useDispatch } from "react-redux"
 
 export default function Employee({employee}) {
-  // console.log("emplyé", employee);
 
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    getHoursCalculate(dispatch, employee)
+  }, [employee])
+  
+  const hoursCalculate = formatHour(employee.estimatedHours)
   const [showModalDeleteEmployee, setShowModalDeleteEmployee] = useState(false)
   const [showModalUpdateEmployee, setShowModalUpdateEmployee] = useState(false)
   
@@ -14,7 +24,7 @@ export default function Employee({employee}) {
     <>
       <tr>
         <th>{employee.name}</th>
-        <td>{employee.estimatedHours}</td>
+        <td>{hoursCalculate}</td>
         <td>{employee.hoursToDo}H</td>
         <td className="btns-employee">
           <button 

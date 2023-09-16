@@ -47,9 +47,13 @@ export const listEmployees = createSlice({
           const indexEvent = currentEmployee.eventsState.findIndex(event => event.id === payload.eventID)
 
           currentEmployee.eventsState.splice(indexEvent, 1)
+        },
+        addEstimatedHours: (state, {payload}) => {
+          const currentEmployee = state.find(employee => employee.id === payload.employeeID)
+          currentEmployee.estimatedHours = payload.millisecondes
         }
     }
 })
 
-export const {setListEmployees, deleteEmployee, updateStateEmployee, addEventState, handleUpdateEvent, deleteEventState} = listEmployees.actions
+export const {setListEmployees, deleteEmployee, updateStateEmployee, addEventState, handleUpdateEvent, deleteEventState, addEstimatedHours} = listEmployees.actions
 export default listEmployees.reducer

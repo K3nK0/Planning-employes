@@ -4,6 +4,7 @@ import Calendar from "../../components/Calendar";
 import BtnAddEvent from "../../components/BtnAddEvent";
 
 import "../../styles/profile.css"
+import { formatHour } from "../../utils/formatHour";
 
 export default function Profile() {
 
@@ -11,6 +12,7 @@ export default function Profile() {
 
   const listEmployees = useSelector(state => state.listEmployees)
   const currentEmployee = listEmployees.find(employee => employee.id === params.id)
+  const hoursCalculate = formatHour(currentEmployee.estimatedHours)
 
   // console.log("list employee",currentEmployee);
 
@@ -20,7 +22,7 @@ export default function Profile() {
       <h2>Planning de {currentEmployee.name}</h2>
 
       <div className="info-employee">
-        <p>Compteur d'heure: {currentEmployee.estimatedHours} / {currentEmployee.hoursToDo}</p>
+        <p>Compteur d'heure: {hoursCalculate} / {currentEmployee.hoursToDo}</p>
         <BtnAddEvent />
       </div>
       
