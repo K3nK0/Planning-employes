@@ -32,7 +32,7 @@ export const listEmployees = createSlice({
           
         },
         handleUpdateEvent: (state, {payload}) => {
-          console.log("payload", payload);
+          
           const findEmployee = state.find(employee => employee.id === payload.employeeId)
 
           const updateEvent = findEmployee.eventsState.find(event => event.id === payload.event.id)

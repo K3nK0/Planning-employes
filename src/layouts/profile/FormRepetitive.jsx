@@ -1,9 +1,198 @@
-import React from 'react'
+import { useState } from 'react'
+import { useDispatch } from 'react-redux'
 
-export default function FormRepetitive() {
+import { collection, addDoc } from "firebase/firestore"; 
+import { db } from '../../config/firebase';
+
+import { addEventState } from '../../features/listEmployees';
+import { getEventsEmployee } from '../../utils/getEmpoyees';
+
+export default function FormRepetitive({closeModal, employeeID}) {
+
+  const dispatch = useDispatch()
+
+  const [inputsStates, setInputsStates] = useState({
+    title: "",
+    dayOrWeek: "days",
+    interval: 1,
+    startDate: "",
+    endDate: "",
+    startHour: "",
+    endHour: ""
+  })
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    const events = [];
+    const startDate = new Date(inputsStates.startDate);
+    const endDate = new Date(inputsStates.endDate);
+    const interval = parseInt(inputsStates.interval);
+    const isWeekly = inputsStates.dayOrWeek === "weeks";
+  
+    if (startDate > endDate) {
+      alert("La date de début doit être antérieure à la date de fin.");
+      return;
+    }
+  
+    let currentDate = startDate;
+    while (currentDate <= endDate) {
+      const event = {
+        title: inputsStates.title,
+        start: `${currentDate.toISOString().slice(0, 10)}T${inputsStates.startHour}:00`,
+        end: `${currentDate.toISOString().slice(0, 10)}T${inputsStates.endHour}:00`,
+      };
+      events.push(event);
+  
+      // Incrémente la date de currentDate en fonction de l'intervalle (jours ou semaines)
+      if (isWeekly) {
+        // Ajoute interval * 7 jours pour l'intervalle en semaines
+        currentDate.setDate(currentDate.getDate() + interval * 7);
+      } else {
+        // Ajoute simplement l'intervalle de jours
+        currentDate.setDate(currentDate.getDate() + interval);
+      }
+    }
+
+    events.forEach(async event => {
+      try {
+        await addDoc(collection(db,"employees", employeeID, "events"), {
+          ...event
+        });
+        } catch (error) {
+          console.log(error);
+        }
+    })
+    
+
+    getEventsEmployee(dispatch, addEventState, employeeID)
+  
+    // Dispatchez tous les événements créés
+    // events.forEach((event) => {
+    //   dispatch(addEventInListEvent(event));
+    // });
+  };
+
   return (
-    <div>
+    <form
+    className="form-add-event"
+    onSubmit={handleSubmit}
+    >
+
+      <div className="input input-name-event">
+        <label htmlFor="titleEvent">Titre</label>
+        <input 
+        type="text" 
+        id="titleEvent" 
+        placeholder="Titre de l'évènement" 
+        value={inputsStates.title}
+        onChange={e => setInputsStates({...inputsStates, title:e.target.value})}
+        required />
+      </div>
+
+      <div className="container-frequences">
+
+        <div className="container-inputs-radio">
+          <p>Tous/toutes les</p>
+          <div className="inputs-radio">
+            <div className="radio">
+              <input 
+              type="radio" 
+              name="dayOrWeek" 
+              value="days"
+              onChange={e => setInputsStates({...inputsStates, dayOrWeek:e.target.value})}
+              id="days" 
+              checked />
+              <label htmlFor="days">jours</label>
+            </div>
+            <div className="radio">
+              <input 
+              type="radio" 
+              name="dayOrWeek" 
+              value="weeks"
+              onChange={e => setInputsStates({...inputsStates, dayOrWeek:e.target.value})}
+              id="weeks" />
+              <label htmlFor="weeks">semaines</label>
+            </div>
+          </div>
+        </div>
+
+        <div className="select-interval">
+          <label htmlFor="interval">Tous les (x) jours/semaines</label>
+          <input 
+          type="number" 
+          id="interval" 
+          value={inputsStates.interval} 
+          onChange={e => setInputsStates({...inputsStates, interval:e.target.value})}
+          min={1}
+          max={7}/>
+        </div>
+
+      </div>
+
+      <div className="input input-start-date">
+        <label htmlFor="dateEvent">Choisir le premier jour</label>
+        <input 
+        type="date" 
+        id="dateEvent" 
+        value={inputsStates.startDate}
+        onChange={e => setInputsStates({...inputsStates, startDate:e.target.value})}
+        />
+      </div>
+
+      <div className="input input-end-date">
+        <label htmlFor="dateEvent">Choisir le dernier jour</label>
+        <input 
+        type="date" 
+        id="dateEvent" 
+        value={inputsStates.endDate}
+        onChange={e => setInputsStates({...inputsStates, endDate:e.target.value})}
+        />
+      </div>
+
+      <div className="input input-date">
+        <label htmlFor="startHourEvent">Heure de début</label>
+        <input 
+        type="time" 
+        id="startHourEvent" 
+        value={inputsStates.startHour}
+        onChange={e => setInputsStates({...inputsStates, startHour:e.target.value})}
+        step="900"
+        />
+      </div>
+
+      <div className="input input-date">
+        <label htmlFor="endHourEvent">Heure de fin</label>
+        <input 
+        type="time" 
+        id="endHourEvent" 
+        value={inputsStates.endHour}
+        onChange={e => setInputsStates({...inputsStates, endHour:e.target.value})}
+        step="900"
+        />
+      </div>
+
+      <div className="container-btns-choice">
+        <button
+        className="btn-valid"
+        >Ajouter</button>
+        <button
+        onClick={() => {
+          setInputsStates({
+            title: "",
+            dayOrWeek: "days",
+            interval: 1,
+            startDate: "",
+            endDate: "",
+            startHour: "",
+            endHour: ""
+          });
+          closeModal()}}
+        className="btn-delete"
+        >Annuler</button>
+      </div>
       
-    </div>
+
+    </form>
   )
 }

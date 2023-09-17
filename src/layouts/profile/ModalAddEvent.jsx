@@ -7,7 +7,7 @@ export default function ModalAddEvent({closeModal, employeeID}) {
     const [choiceFrequence, setChoiceFrequence] = useState(0)
     const componentChoiceFrequence = [
         {component: <FormUnique closeModal={closeModal} employeeID={employeeID} />},
-        {component: <FormRepetitive />}
+        {component: <FormRepetitive closeModal={closeModal} employeeID={employeeID} />}
     ]
 
   return (
