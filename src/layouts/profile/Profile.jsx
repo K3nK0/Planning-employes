@@ -1,10 +1,12 @@
 import { useParams } from "react-router-dom"
 import { useSelector } from "react-redux";
 import Calendar from "../../components/Calendar";
-import BtnAddEvent from "../../components/BtnAddEvent";
 
 import "../../styles/profile.css"
 import { formatHour } from "../../utils/formatHour";
+import { useState } from "react";
+import { createPortal } from "react-dom";
+import ModalAddEvent from "./ModalAddEvent";
 
 export default function Profile() {
 
@@ -14,20 +16,29 @@ export default function Profile() {
   const currentEmployee = listEmployees.find(employee => employee.id === params.id)
   const hoursCalculate = formatHour(currentEmployee.estimatedHours)
 
-  // console.log("list employee",currentEmployee);
+  const [showModalAddEvent, setShowModalAddEvent] = useState(false)
 
   return (
+    <>
     <div className="container-profile">
 
       <h2>Planning de {currentEmployee.name}</h2>
 
       <div className="info-employee">
         <p>Compteur d'heure: {hoursCalculate} / {currentEmployee.hoursToDo}</p>
-        <BtnAddEvent />
+        <button
+        className="btn-add-event"
+        onClick={() => setShowModalAddEvent(true)}
+        >
+          Ajouter un événement
+        </button>
       </div>
       
       <Calendar employee={currentEmployee} />
 
+      {showModalAddEvent && createPortal(<ModalAddEvent closeModal={() => setShowModalAddEvent(false)} employeeID={currentEmployee.id} />, document.body)}
+
     </div>
+    </>
   )
 }
