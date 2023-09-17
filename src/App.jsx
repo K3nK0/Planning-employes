@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 
 import './App.css'
@@ -8,11 +7,10 @@ import Management from './layouts/management/Management'
 import Profile from './layouts/profile/Profile'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-      <BrowserRouter>
+      {/* <BrowserRouter> */}
       <div className="container-full">
       <Navbar />
       <Routes>
@@ -21,7 +19,7 @@ function App() {
       </Routes>
       </div>
 
-      </BrowserRouter>
+      {/* </BrowserRouter> */}
     </>
   )
 }
