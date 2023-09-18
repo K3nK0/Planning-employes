@@ -10,7 +10,6 @@ function App() {
 
   return (
     <>
-      {/* <BrowserRouter> */}
       <div className="container-full">
       <Navbar />
       <Routes>
@@ -18,8 +17,6 @@ function App() {
         <Route path="/profile/:id" element={<Profile />} />
       </Routes>
       </div>
-
-      {/* </BrowserRouter> */}
     </>
   )
 }
