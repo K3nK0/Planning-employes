@@ -93,3 +93,41 @@ input {
   border-radius: 5px;
   cursor: pointer;
 }
+
+.container-radio {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 26px;
+
+}
+
+.container-input-radio {
+  width: 100%;
+  position: relative;
+  background: var(--anthracite);
+}
+
+.container-input-radio:has(input:checked){
+  background: var(--anthraciteHover);
+}
+
+.input-radio {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  top: 0;
+  left: 0;
+}
+
+.label-radio {
+  padding: 8px;
+  color: var(--text);
+  width: 100%;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+.label-radio:hover {
+  background: var(--anthraciteHover);
+}

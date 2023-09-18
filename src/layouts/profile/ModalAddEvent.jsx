@@ -4,10 +4,11 @@ import FormRepetitive from './FormRepetitive'
 
 export default function ModalAddEvent({closeModal, employeeID}) {
 
-    const [choiceFrequence, setChoiceFrequence] = useState(0)
+    const [choiceFrequence, setChoiceFrequence] = useState(2)
     const componentChoiceFrequence = [
         {component: <FormUnique closeModal={closeModal} employeeID={employeeID} />},
-        {component: <FormRepetitive closeModal={closeModal} employeeID={employeeID} />}
+        {component: <FormRepetitive closeModal={closeModal} employeeID={employeeID} />},
+        {component: ""}
     ]
 
   return (
@@ -28,7 +29,7 @@ export default function ModalAddEvent({closeModal, employeeID}) {
                     onChange={() => setChoiceFrequence(0)}
                     // checked
                     />
-                    <label htmlFor="event-unique">Unique</label>
+                    <label className='label-radio' htmlFor="event-unique">Unique</label>
                 </div>
                 <div className="container-input-radio">
                     <input 
@@ -38,7 +39,7 @@ export default function ModalAddEvent({closeModal, employeeID}) {
                     className='input-radio' 
                     onChange={() => setChoiceFrequence(1)}
                     />
-                    <label htmlFor="event-repetitive">Répétitif</label>                  
+                    <label className='label-radio' htmlFor="event-repetitive">Répétitif</label>                  
                 </div>
             </div>
 

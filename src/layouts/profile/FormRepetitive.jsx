@@ -44,12 +44,9 @@ export default function FormRepetitive({closeModal, employeeID}) {
       };
       events.push(event);
   
-      // Incrémente la date de currentDate en fonction de l'intervalle (jours ou semaines)
       if (isWeekly) {
-        // Ajoute interval * 7 jours pour l'intervalle en semaines
         currentDate.setDate(currentDate.getDate() + interval * 7);
       } else {
-        // Ajoute simplement l'intervalle de jours
         currentDate.setDate(currentDate.getDate() + interval);
       }
     }
@@ -63,14 +60,8 @@ export default function FormRepetitive({closeModal, employeeID}) {
           console.log(error);
         }
     })
-    
 
     getEventsEmployee(dispatch, addEventState, employeeID)
-  
-    // Dispatchez tous les événements créés
-    // events.forEach((event) => {
-    //   dispatch(addEventInListEvent(event));
-    // });
   };
 
   return (
@@ -91,30 +82,33 @@ export default function FormRepetitive({closeModal, employeeID}) {
       </div>
 
       <div className="container-frequences">
+      <p>Tous/toutes les</p>
 
-        <div className="container-inputs-radio">
-          <p>Tous/toutes les</p>
-          <div className="inputs-radio">
-            <div className="radio">
+        <div className="container-radio">
+          
+
+            <div className="container-input-radio">
               <input 
               type="radio" 
               name="dayOrWeek" 
               value="days"
               onChange={e => setInputsStates({...inputsStates, dayOrWeek:e.target.value})}
+              className='input-radio'
               id="days" 
-              checked />
-              <label htmlFor="days">jours</label>
+               />
+              <label className='label-radio' htmlFor="days">jours</label>
             </div>
-            <div className="radio">
+            <div className="container-input-radio">
               <input 
               type="radio" 
               name="dayOrWeek" 
               value="weeks"
               onChange={e => setInputsStates({...inputsStates, dayOrWeek:e.target.value})}
+              className='input-radio'
               id="weeks" />
-              <label htmlFor="weeks">semaines</label>
+              <label className='label-radio' htmlFor="weeks">semaines</label>
             </div>
-          </div>
+
         </div>
 
         <div className="select-interval">
