@@ -4,10 +4,13 @@ import {auth} from "../config/firebase"
 
 import { Outlet } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import { getUserConnected } from "../features/userConnected";
 
 export default function Login() {
+
+  const navigate = useNavigate()
 
   const userConnect = useSelector(state => state.userConnected)
   console.log("userConnect",userConnect);
@@ -28,6 +31,7 @@ export default function Login() {
             .then(data => {
               if(data.operationType === "signIn") {
                 dispatch(getUserConnected(true))
+                navigate("/management")
               }
             })
         } catch (error) {

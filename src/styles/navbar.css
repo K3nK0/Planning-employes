@@ -1,10 +1,8 @@
 .left-side {
     background: var(--anthracite);
-    /* width: 250px;
-    height: 100vh; */
 }
 
-a {
+.link-navbar {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -13,12 +11,16 @@ a {
     font-size: 20px;
     text-align: center;
     padding: 10px 0;
-    color: var(--text);
+    color: var(--textMenu);
     text-decoration: none;
     border-bottom: 1px solid var(--anthraciteHover);
 }
 
-a:hover {
+.link-navbar.active {
+    background: var(--anthraciteHover);
+}
+
+.link-navbar:hover {
     background: var(--anthraciteHover);
 }
 

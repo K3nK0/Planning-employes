@@ -29,13 +29,13 @@ tr:nth-child(even) {
 
 thead {
     background-color: var(--anthracite);
-    color: var(--text);
+    color: var(--textMenu);
 }
 
 .btn-add-employee, .btn-add-event {
     background: var(--anthracite);
     font-size: 18px;
-    color: var(--text);
+    color: var(--textMenu);
     padding: 10px 15px;
     border: none;
     margin-bottom: 20px;

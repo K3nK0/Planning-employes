@@ -27,9 +27,10 @@ h3 {
 .container-modal {
   position: relative;
   min-width: 400px;
-  background: var(--text);
+  background: var(--textMenu);
   padding: 30px;
   border-radius: 8px;
+  overflow-y: auto;
 }
 
 .traverser {
@@ -46,6 +47,10 @@ h3 {
   flex-direction: column;
   margin-bottom: 26px;
   gap: 2px;
+  /* background: #e8e8e8; */
+  padding: 10px 14px;
+  border-radius: 5px;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, .3);
 }
 
 label {
@@ -64,10 +69,10 @@ input {
   width: 100%;
   padding: 8px;
   background: var(--anthracite);
-  color: var(--text);
+  color: var(--textMenu);
   font-size: 18px;
   border: none;
-  border-radius: 8px;
+  border-radius: 5px;
   cursor: pointer;
 }
 
@@ -91,7 +96,7 @@ input {
 
 .btn-valid, .btn-delete {
   font-weight: 600;
-  color: var(--text);
+  color: var(--textMenu);
   padding: 8px;
   border: none;
   border-radius: 5px;
@@ -102,6 +107,8 @@ input {
   display: flex;
   justify-content: center;
   margin-bottom: 26px;
+  border-radius: 5px;
+  overflow: hidden;
 
 }
 
@@ -125,7 +132,7 @@ input {
 
 .label-radio {
   padding: 8px;
-  color: var(--text);
+  color: var(--textMenu);
   width: 100%;
   display: grid;
   place-items: center;
