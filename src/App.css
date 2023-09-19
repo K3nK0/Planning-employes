@@ -13,6 +13,10 @@
   z-index: 10;
 }
 
+.modal-login {
+  background: var(--anthracite);
+}
+
 h3 {
   font-size: 22px;
   margin-bottom: 26px;
