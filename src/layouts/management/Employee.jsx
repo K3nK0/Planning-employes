@@ -6,14 +6,15 @@ import ModalUpdateEmployee from "./ModalUpdateEmployee"
 import { formatHour } from "../../utils/formatHour"
 import { useEffect } from "react"
 import getHoursCalculate from "../../utils/getHoursCalculate"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 
 export default function Employee({employee}) {
 
   const dispatch = useDispatch()
+  const interval = useSelector(state => state.dateInterval)
 
   useEffect(() => {
-    getHoursCalculate(dispatch, employee)
+    getHoursCalculate(dispatch, employee, interval)
   }, [employee])
   
   const hoursCalculate = formatHour(employee.estimatedHours)

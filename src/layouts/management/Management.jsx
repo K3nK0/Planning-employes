@@ -9,6 +9,7 @@ import { getEmployees } from "../../utils/getEmpoyees";
 import Employee from "./Employee"
 import ModalAddEmployee from "./ModalAddEmployee";
 import getHoursCalculate from "../../utils/getHoursCalculate";
+import HourMeter from "../../components/HourMeter";
 
 export default function Management() {
 
@@ -16,6 +17,7 @@ export default function Management() {
 
   const [showModalAddEmployee, setShowModalAddEmployee] = useState(false)
   const listEmployees = useSelector(state => state.listEmployees)
+  const interval = useSelector(state => state.dateInterval)
 
   useEffect(() => {
     getEmployees(dispatch, setListEmployees);
@@ -23,17 +25,19 @@ export default function Management() {
 
   useEffect(() => {
     listEmployees.forEach(employee => {
-      getHoursCalculate(dispatch, employee)
+      getHoursCalculate(dispatch, employee, interval)
     })
     
-  }, [listEmployees])
+  }, [listEmployees, interval])
 
   return (
     <main className="page-management">
       <h2>Gestion des employés</h2>
       <button 
       onClick={() => setShowModalAddEmployee(true)}
-      className="btn-add-employee">Ajouter un employé</button>
+      className="btn-add-employee">Ajouter un employé
+      </button>
+      <HourMeter />
       <table>
         <thead>
           <tr>

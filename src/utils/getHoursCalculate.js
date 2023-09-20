@@ -1,5 +1,4 @@
 import { addEstimatedHours } from "../features/listEmployees";
-import Employee from "../layouts/management/Employee";
 
 const calculMillisecondes = (events) => {
     let time = 0;
@@ -15,12 +14,18 @@ const calculMillisecondes = (events) => {
     return time
 }
 
-export default function getHoursCalculate(dispatch, employee){
+export default function getHoursCalculate(dispatch, employee, dateInterval){
 
     if(employee.eventsState.length !== 0){
         let events = [...employee.eventsState]
-        
-        let sortedEvents = events.sort((a, b) => new Date(a.start) - new Date(b.start))
+        let eventsInInterval = []
+        for(let i = 0; i < events.length; i++){
+            if(events[i].start > dateInterval.startDate && events[i].end < dateInterval.endDate){
+                eventsInInterval.push(events[i])
+            };
+        }
+
+        let sortedEvents = eventsInInterval.sort((a, b) => new Date(a.start) - new Date(b.start))
         
         let listEventsSorted = []
         listEventsSorted.push(sortedEvents[0])

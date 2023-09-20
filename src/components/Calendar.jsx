@@ -20,6 +20,8 @@ export default function Calendar({employee}) {
 
   const dispatch = useDispatch()
 
+  const interval = useSelector(state => state.dateInterval)
+
   const listEmployees = useSelector(state => state.listEmployees)
   const currentEmployee = listEmployees.find(employeeState => employeeState.id === employee.id)
   const listEvents = currentEmployee.eventsState
@@ -32,7 +34,7 @@ export default function Calendar({employee}) {
   })
 
   useEffect(() => {
-    getHoursCalculate(dispatch, employee);
+    getHoursCalculate(dispatch, employee, interval);
   }, [listEmployees]); 
 
   const handleSelect = (info) => {
