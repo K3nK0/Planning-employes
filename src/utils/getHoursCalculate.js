@@ -3,7 +3,7 @@ import { addEstimatedHours } from "../features/listEmployees";
 const calculMillisecondes = (events) => {
     let time = 0;
     
-    if(events[0] === undefined) return
+    if(events[0] === undefined) return 0
     events.forEach(event => {
         const start = new Date(event.start);
         const end = new Date(event.end);

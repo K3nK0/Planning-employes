@@ -38,12 +38,22 @@ thead {
     color: var(--textMenu);
     padding: 10px 15px;
     border: none;
-    margin-bottom: 20px;
     border-radius: 5px;
     cursor: pointer;
     box-shadow: 0 5px 10px rgba(0, 0, 0, .5);
 }
 
+.btn-add-event {
+    margin-bottom: 20px;
+}
+
 .btn-add-employee:hover, .btn-add-event:hover {
     background: var(--anthraciteHover);
+}
+
+.header-management {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
 }

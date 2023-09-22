@@ -33,11 +33,13 @@ export default function Management() {
   return (
     <main className="page-management">
       <h2>Gestion des employés</h2>
-      <button 
-      onClick={() => setShowModalAddEmployee(true)}
-      className="btn-add-employee">Ajouter un employé
-      </button>
-      <HourMeter />
+      <div className="header-management">
+        <button 
+        onClick={() => setShowModalAddEmployee(true)}
+        className="btn-add-employee">Ajouter un employé
+        </button>
+        <HourMeter />
+      </div>
       <table>
         <thead>
           <tr>

@@ -1,0 +1,31 @@
+.container-hourMeter {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: var(--anthracite);
+    border-radius: 5px;
+    padding: 10px 15px;
+    color: var(--textMenu);
+    font-size: 18px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .5);
+}
+
+.choice-date-meter {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.choice-date-meter input[type="date"] {
+    color: var(--textMenu);
+    cursor: pointer;
+    font-size: 15px;
+    padding: 0;
+    border: none;
+}
+
+::-webkit-calendar-picker-indicator{
+    background-color: var(--textMenu);
+    border-radius: 5px;
+    cursor: pointer;
+}

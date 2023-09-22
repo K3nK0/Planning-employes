@@ -1,16 +1,16 @@
+import "../styles/hourMeter.css"
+
 import { useSelector, useDispatch } from "react-redux"
 import { getDateInterval } from "../features/dateInterval"
-import getHoursCalculate from "../utils/getHoursCalculate"
+
 
 export default function HourMeter() {
 
   const dispatch = useDispatch()
   const interval = useSelector(state => state.dateInterval)
-  const listEmployees = useSelector(state => state.listEmployees)
-  
 
   return (
-    <div>
+    <div className="container-hourMeter">
 
         <h4>Date compteur d'heures</h4>
 
