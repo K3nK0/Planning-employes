@@ -43,9 +43,11 @@ export default function Management() {
       <table>
         <thead>
           <tr>
-            <th>prénom</th>
-            <th>estimation d'heures</th>
-            <th>heures à faire</th>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Email</th>
+            <th>Estimation d'heures</th>
+            <th>Heures à faire</th>
             <th></th>
           </tr>
         </thead>

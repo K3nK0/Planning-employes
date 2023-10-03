@@ -12,7 +12,9 @@ export default function ModalAddEmployee({closeModalAddEmployee}) {
     const dispatch = useDispatch()
 
     const [addEmployee, setAddEmployee] = useState({
-        name: "",
+        firstName: "",
+        lastName: "",
+        email: "",
         hoursToDo: 0,
         estimatedHours: 0
     })
@@ -21,10 +23,12 @@ export default function ModalAddEmployee({closeModalAddEmployee}) {
         e.preventDefault()
 
         const employee = {
-            name: addEmployee.name,
+            firstName: addEmployee.firstName,
+            lastName: addEmployee.lastName,
+            email: addEmployee.email,
             hoursToDo: addEmployee.hoursToDo,
             estimatedHours: 0,
-            eventState: []
+            eventsState: []
         }
 
         try {
@@ -37,7 +41,9 @@ export default function ModalAddEmployee({closeModalAddEmployee}) {
         getEmployees(dispatch, setListEmployees)
 
         setAddEmployee({
-            name: "",
+            firstName: "",
+            lastName: "",
+            email: "",
             hoursToDo: 0,
             estimatedHours: 0
         })
@@ -52,16 +58,41 @@ export default function ModalAddEmployee({closeModalAddEmployee}) {
         className="container-modal">
             <h3>Renseigner un nouvel employé</h3>
             <div className="input">
-                <label htmlFor="name">Prénom</label>
+                <label htmlFor="first-name">Nom</label>
                 <input 
                 type="text" 
-                id="name" 
-                placeholder="Prénom" 
-                value={addEmployee.name}
-                onChange={e => setAddEmployee({...addEmployee, name: e.target.value})}
+                id="first-name" 
+                placeholder="Nom" 
+                value={addEmployee.firstName}
+                onChange={e => setAddEmployee({...addEmployee, firstName: e.target.value})}
                 required
                 />
             </div>
+
+            <div className="input">
+                <label htmlFor="last-name">Prénom</label>
+                <input 
+                type="text" 
+                id="last-name" 
+                placeholder="Prénom" 
+                value={addEmployee.lastName}
+                onChange={e => setAddEmployee({...addEmployee, lastName: e.target.value})}
+                required
+                />
+            </div>
+
+            <div className="input">
+                <label htmlFor="email">Email</label>
+                <input 
+                type="email" 
+                id="email" 
+                placeholder="Email" 
+                value={addEmployee.email}
+                onChange={e => setAddEmployee({...addEmployee, email: e.target.value})}
+                required
+                />
+            </div>
+
             <div className="input">
                 <label htmlFor="hoursTodo">Heures à effectuer</label>
                 <input 
@@ -73,6 +104,7 @@ export default function ModalAddEmployee({closeModalAddEmployee}) {
                 onChange={e => setAddEmployee({...addEmployee, hoursToDo: e.target.value})}
                 />
             </div>
+
             <button className="btn-send">Envoyer</button>
             <img 
             src={traverser} 

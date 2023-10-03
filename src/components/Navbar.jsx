@@ -24,7 +24,7 @@ export default function Navbar() {
         to={{
           pathname: `/profile/${employee.id}`
           }} >
-            <span>{employee.name}</span>
+            <span>{employee.firstName} {employee.lastName}</span>
             <img src={employe} alt="" className="icon-nav" />
         </NavLink>
       ))}

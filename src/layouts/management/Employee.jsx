@@ -24,7 +24,9 @@ export default function Employee({employee}) {
   return (
     <>
       <tr>
-        <th>{employee.name}</th>
+        <th>{employee.firstName}</th>
+        <th>{employee.lastName}</th>
+        <th>{employee.email}</th>
         <td>{hoursCalculate}</td>
         <td>{employee.hoursToDo}H</td>
         <td className="btns-employee">
