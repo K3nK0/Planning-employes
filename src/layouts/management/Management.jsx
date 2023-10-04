@@ -19,9 +19,9 @@ export default function Management() {
   const listEmployees = useSelector(state => state.listEmployees)
   const interval = useSelector(state => state.dateInterval)
 
-  useEffect(() => {
-    getEmployees(dispatch, setListEmployees);
-  }, []);
+  // useEffect(() => {
+  //   getEmployees(dispatch, setListEmployees);
+  // }, []);
 
   useEffect(() => {
     listEmployees.forEach(employee => {

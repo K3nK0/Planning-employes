@@ -16,7 +16,7 @@ const calculMillisecondes = (events) => {
 
 export default function getHoursCalculate(dispatch, employee, dateInterval){
 
-    console.log("eventState", employee.eventsState);
+    // console.log("eventState", employee.eventsState);
     if(employee.eventsState !== undefined){
         let events = [...employee.eventsState]
         let eventsInInterval = []

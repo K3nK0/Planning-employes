@@ -7,15 +7,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import { getUserConnected } from "../features/userConnected";
+import { getEmployees } from "../utils/getEmpoyees";
+import { setListEmployees } from "../features/listEmployees";
 
 export default function Login() {
 
   const navigate = useNavigate()
 
   const userConnect = useSelector(state => state.userConnected)
-  console.log("userConnect",userConnect);
 
   const dispatch = useDispatch()
+
+  async function getDataAfterLogin() {
+    await getEmployees(dispatch, setListEmployees)
+    console.log("userConnect", auth.currentUser);
+    dispatch(getUserConnected(true))
+
+  }
 
     const [loginForm, setLoginForm] = useState({
         email: "",
@@ -25,13 +33,14 @@ export default function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        console.log("loginForm", loginForm);
+        // console.log("loginForm", loginForm);
         try {
             await signInWithEmailAndPassword(auth, loginForm.email, loginForm.pwd)
             .then(data => {
               if(data.operationType === "signIn") {
-                dispatch(getUserConnected(true))
-                navigate("/management")
+                getDataAfterLogin()
+
+                // const user = auth.currentUser
               }
             })
         } catch (error) {

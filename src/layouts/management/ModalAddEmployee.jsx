@@ -1,11 +1,13 @@
-import traverser from "../../assets/traverser.svg"
+    import traverser from "../../assets/traverser.svg"
 import { useState } from "react"
 import { useDispatch } from "react-redux";
 
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../config/firebase";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { setListEmployees } from "../../features/listEmployees";
 import { getEmployees } from "../../utils/getEmpoyees";
+import { nanoid } from "nanoid";
 
 export default function ModalAddEmployee({closeModalAddEmployee}) {
 
@@ -22,23 +24,40 @@ export default function ModalAddEmployee({closeModalAddEmployee}) {
     const handleSubmit = async e => {
         e.preventDefault()
 
-        const employee = {
-            firstName: addEmployee.firstName,
-            lastName: addEmployee.lastName,
-            email: addEmployee.email,
-            hoursToDo: addEmployee.hoursToDo,
-            estimatedHours: 0,
-            eventsState: []
-        }
+        const auth = getAuth();
+        const password = "gymLanester56"
+        await createUserWithEmailAndPassword(auth, addEmployee.email, password)
+        .then(async () => {
 
-        try {
-            await addDoc(collection(db, "employees"), {
-                ...employee
-            })
-        } catch (err) {
-            console.log(err);
-        }
-        getEmployees(dispatch, setListEmployees)
+            const employee = {
+                id: auth.currentUser.uid,
+                firstName: addEmployee.firstName,
+                lastName: addEmployee.lastName,
+                email: addEmployee.email,
+                hoursToDo: addEmployee.hoursToDo,
+                estimatedHours: 0,
+                eventsState: []
+            }
+
+            try {
+                await addDoc(collection(db, "employees"), {
+                    ...employee
+                })
+            } catch (err) {
+                console.log(err);
+            }
+            getEmployees(dispatch, setListEmployees)
+            // Signed up 
+            // const user = `${employee.firstName} ${employee.lastName}`;
+            // ...
+            console.log("user créé");
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log("error createUser",errorMessage);
+            // ..
+        });
 
         setAddEmployee({
             firstName: "",
