@@ -22,7 +22,7 @@ export default function Profile() {
     <>
     <div className="container-profile">
 
-      <h2>Planning de {currentEmployee.firstName} {currentEmployee.lastName}</h2>
+      <h2>Planning de {currentEmployee.lastName} {currentEmployee.firstName}</h2>
 
       <div className="info-employee">
         <p>Compteur d'heure: {hoursCalculate} / {currentEmployee.hoursToDo}</p>

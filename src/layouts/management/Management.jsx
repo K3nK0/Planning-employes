@@ -17,6 +17,7 @@ export default function Management() {
 
   const [showModalAddEmployee, setShowModalAddEmployee] = useState(false)
   const listEmployees = useSelector(state => state.listEmployees)
+  // console.log("listemployee", listEmployees);
   const interval = useSelector(state => state.dateInterval)
 
   // useEffect(() => {

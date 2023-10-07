@@ -19,8 +19,8 @@ export default function ModalUpdateEmployee({employee, closeModal}) {
 
         const employeeUpdate = {
             id: updateEmployee.id,
-            firstName: updateEmployee.firstName,
             lastName: updateEmployee.lastName,
+            firstName: updateEmployee.firstName,
             email: updateEmployee.email,
             hoursToDo: updateEmployee.hoursToDo,
             estimatedHours: updateEmployee.estimatedHours
@@ -38,26 +38,27 @@ export default function ModalUpdateEmployee({employee, closeModal}) {
         onSubmit={handleSubmit}
         className="container-modal">
             <h3>Modification</h3>
+
             <div className="input">
-                <label htmlFor="first-name">Nom</label>
+                <label htmlFor="last-name">Nom</label>
                 <input 
                 type="text" 
-                id="first-name" 
+                id="last-name" 
                 placeholder="Nom" 
-                value={updateEmployee.firstName}
-                onChange={e => setUpdateEmployee({...updateEmployee, firstName: e.target.value})}
+                value={updateEmployee.lastName}
+                onChange={e => setUpdateEmployee({...updateEmployee, lastName: e.target.value})}
                 required
                 />
             </div>
 
             <div className="input">
-                <label htmlFor="last-name">Prénom</label>
+                <label htmlFor="first-name">Prénom</label>
                 <input 
                 type="text" 
-                id="last-name" 
+                id="first-name" 
                 placeholder="Prénom" 
-                value={updateEmployee.lastName}
-                onChange={e => setUpdateEmployee({...updateEmployee, lastName: e.target.value})}
+                value={updateEmployee.firstName}
+                onChange={e => setUpdateEmployee({...updateEmployee, firstName: e.target.value})}
                 required
                 />
             </div>

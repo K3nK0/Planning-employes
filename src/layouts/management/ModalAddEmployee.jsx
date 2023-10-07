@@ -31,8 +31,8 @@ export default function ModalAddEmployee({closeModalAddEmployee}) {
 
             const employee = {
                 id: auth.currentUser.uid,
-                firstName: addEmployee.firstName,
                 lastName: addEmployee.lastName,
+                firstName: addEmployee.firstName,
                 email: addEmployee.email,
                 hoursToDo: addEmployee.hoursToDo,
                 estimatedHours: 0,
@@ -60,8 +60,8 @@ export default function ModalAddEmployee({closeModalAddEmployee}) {
         });
 
         setAddEmployee({
-            firstName: "",
             lastName: "",
+            firstName: "",
             email: "",
             hoursToDo: 0,
             estimatedHours: 0
@@ -76,26 +76,27 @@ export default function ModalAddEmployee({closeModalAddEmployee}) {
         onSubmit={handleSubmit}
         className="container-modal">
             <h3>Renseigner un nouvel employé</h3>
+
             <div className="input">
-                <label htmlFor="first-name">Nom</label>
+                <label htmlFor="last-name">Nom</label>
                 <input 
                 type="text" 
-                id="first-name" 
+                id="last-name" 
                 placeholder="Nom" 
-                value={addEmployee.firstName}
-                onChange={e => setAddEmployee({...addEmployee, firstName: e.target.value})}
+                value={addEmployee.lastName}
+                onChange={e => setAddEmployee({...addEmployee, lastName: e.target.value})}
                 required
                 />
             </div>
 
             <div className="input">
-                <label htmlFor="last-name">Prénom</label>
+                <label htmlFor="first-name">Prénom</label>
                 <input 
                 type="text" 
-                id="last-name" 
+                id="first-name" 
                 placeholder="Prénom" 
-                value={addEmployee.lastName}
-                onChange={e => setAddEmployee({...addEmployee, lastName: e.target.value})}
+                value={addEmployee.firstName}
+                onChange={e => setAddEmployee({...addEmployee, firstName: e.target.value})}
                 required
                 />
             </div>
