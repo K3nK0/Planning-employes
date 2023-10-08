@@ -13,7 +13,6 @@ export const getEmployees = async (dispatch, setListEmployees) => {
   
 };
 
-
 export const getEventsEmployee = async (dispatch, addEventState, employeeId) => {
   const querySnapshot = await getDocs(collection(db, "employees", employeeId, "events"));
   const eventsEmployee = querySnapshot.docs.map(doc => ({id: doc.id, ...doc.data()}))

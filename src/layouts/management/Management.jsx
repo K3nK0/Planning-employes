@@ -17,18 +17,12 @@ export default function Management() {
 
   const [showModalAddEmployee, setShowModalAddEmployee] = useState(false)
   const listEmployees = useSelector(state => state.listEmployees)
-  // console.log("listemployee", listEmployees);
   const interval = useSelector(state => state.dateInterval)
-
-  // useEffect(() => {
-  //   getEmployees(dispatch, setListEmployees);
-  // }, []);
 
   useEffect(() => {
     listEmployees.forEach(employee => {
       getHoursCalculate(dispatch, employee, interval)
     })
-    
   }, [listEmployees, interval])
 
   return (
@@ -55,7 +49,7 @@ export default function Management() {
         <tbody>
           {listEmployees !== undefined &&(
             listEmployees.map(employee => (
-              <Employee key={employee.id} employee={employee} />
+              <Employee key={employee.uid} employee={employee} />
             ))
           )}
         </tbody>

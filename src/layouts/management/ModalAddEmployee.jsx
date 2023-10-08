@@ -30,7 +30,7 @@ export default function ModalAddEmployee({closeModalAddEmployee}) {
         .then(async () => {
 
             const employee = {
-                id: auth.currentUser.uid,
+                uid: auth.currentUser.uid,
                 lastName: addEmployee.lastName,
                 firstName: addEmployee.firstName,
                 email: addEmployee.email,

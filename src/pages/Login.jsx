@@ -19,36 +19,32 @@ export default function Login() {
 
   const dispatch = useDispatch()
 
+  useEffect(() => {
+    getEmployees(dispatch, setListEmployees);
+  }, [userConnect])
+
   async function getEmployeeConnect() {
-    try {
-      await getEmployees(dispatch, setListEmployees);
-      console.log("getEmployeeConnect", listEmployees);
+
+    let linkNavigate = "/management";
   
-      let linkNavigate = "/management"; // Par défaut, si aucun employé correspondant n'est trouvé
-  
-      for (const employee of listEmployees) {
-        console.log("employee forOf");
-        if (auth.currentUser.uid === employee.id) {
-          linkNavigate = `/profile/${employee.id}`;
-          break; // Sortez de la boucle une fois que vous avez trouvé une correspondance
-        }
+    for(const employee of listEmployees) {
+      if(auth.currentUser.uid === employee.uid) {
+        linkNavigate = `/profile/${employee.id}`;
+        break;
       }
-  
-      navigate(linkNavigate);
-    } catch (error) {
-      console.error("Une erreur s'est produite lors de la récupération des employés : ", error);
-      // Gérer l'erreur ici, par exemple en redirigeant vers une page d'erreur
     }
+    navigate(linkNavigate);
   }
   
   async function getDataAfterLogin() {
-    console.log("getDataAfterLogin");
-    // await getEmployeeConnect();
-    navigate("/management");
+    try {
+      await getEmployeeConnect();
+    } catch (error) {
+      console.log(error);
+    }
     dispatch(getUserConnected(true));
   }
   
-
   const [loginForm, setLoginForm] = useState({
       email: "",
       pwd: ""
@@ -56,16 +52,12 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
       e.preventDefault()
-
-      // console.log("loginForm", loginForm);
       try {
           await signInWithEmailAndPassword(auth, loginForm.email, loginForm.pwd)
           .then(async (data) => {
             if(data.operationType === "signIn") {
-              await getEmployees(dispatch, setListEmployees);
+              console.log("auth",auth);
               getDataAfterLogin()
-
-              // const user = auth.currentUser
             }
           })
       } catch (error) {
