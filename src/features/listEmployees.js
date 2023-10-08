@@ -23,15 +23,14 @@ export const listEmployees = createSlice({
         },
         addEventState: (state, {payload}) => {
           const currentEmployee = state.find(employeeState => employeeState.id === payload.employee)
+          currentEmployee.eventsState = []
           if(payload.events.length !== undefined){
             payload.events.forEach(event => {
               currentEmployee.eventsState.push(event)
             })
           }
           else {
-            currentEmployee.eventsState.push(payload.events)
-          }
-          
+              currentEmployee.eventsState.push(payload.events)}
         },
         handleUpdateEvent: (state, {payload}) => {
           

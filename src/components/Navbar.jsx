@@ -17,14 +17,14 @@ export default function Navbar() {
           <span>Gestion</span>
           <img src={employees} alt="" className="icon-nav" />
       </NavLink>
-      {listEmployees.map(employee => (
+      {listEmployees.sort().map(employee => (
         <NavLink
         className="link-navbar"
         key={employee.id}
         to={{
           pathname: `/profile/${employee.id}`
           }} >
-            <span>{employee.firstName} {employee.lastName}</span>
+            <span>{employee.lastName} {employee.firstName}</span>
             <img src={employe} alt="" className="icon-nav" />
         </NavLink>
       ))}

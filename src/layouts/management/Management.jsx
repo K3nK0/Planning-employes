@@ -49,7 +49,7 @@ export default function Management() {
         <tbody>
           {listEmployees !== undefined &&(
             listEmployees.map(employee => (
-              <Employee key={employee.uid} employee={employee} />
+              <Employee key={employee.id} employee={employee} />
             ))
           )}
         </tbody>
