@@ -19,13 +19,10 @@ export default function Login() {
 
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    getEmployees(dispatch, setListEmployees);
-  }, [userConnect])
-
-  async function getEmployeeConnect() {
+  function getEmployeeConnect(dataEmployees) {
 
     let linkNavigate = "/management";
+    console.log("employe et auth", dataEmployees, auth.currentUser.uid);
   
     for(const employee of listEmployees) {
       if(auth.currentUser.uid === employee.uid) {
@@ -34,15 +31,19 @@ export default function Login() {
       }
     }
     navigate(linkNavigate);
+    dispatch(getUserConnected(true));
   }
   
   async function getDataAfterLogin() {
+    
     try {
-      await getEmployeeConnect();
+      const dataEmployees = await getEmployees(dispatch, setListEmployees);
+      getEmployeeConnect(dataEmployees);
+
     } catch (error) {
       console.log(error);
     }
-    dispatch(getUserConnected(true));
+    
   }
   
   const [loginForm, setLoginForm] = useState({
@@ -56,8 +57,7 @@ export default function Login() {
           await signInWithEmailAndPassword(auth, loginForm.email, loginForm.pwd)
           .then(async (data) => {
             if(data.operationType === "signIn") {
-              console.log("auth",auth);
-              getDataAfterLogin()
+              await getDataAfterLogin()
             }
           })
       } catch (error) {

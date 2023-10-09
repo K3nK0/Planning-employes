@@ -7,8 +7,6 @@ export const listEmployees = createSlice({
     initialState,
     reducers: {
         setListEmployees: (state, {payload}) => {
-          console.log("payload", payload);
-          
           return payload;
         },
         deleteEmployee: (state, {payload}) => {

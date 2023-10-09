@@ -2,7 +2,7 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux";
 
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, doc, setDoc } from "firebase/firestore";
 import { db } from "../../config/firebase";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { setListEmployees } from "../../features/listEmployees";
@@ -40,9 +40,10 @@ export default function ModalAddEmployee({closeModalAddEmployee}) {
             }
 
             try {
-                await addDoc(collection(db, "employees"), {
-                    ...employee
-                })
+                // await addDoc(collection(db, "employees"), {
+                //     ...employee
+                // })
+                await setDoc(doc(db, "employees", employee.uid), employee)
             } catch (err) {
                 console.log(err);
             }

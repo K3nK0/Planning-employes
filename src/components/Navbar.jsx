@@ -17,7 +17,7 @@ export default function Navbar() {
           <span>Gestion</span>
           <img src={employees} alt="" className="icon-nav" />
       </NavLink>
-      {listEmployees.sort().map(employee => (
+      {listEmployees.map(employee => (
         <NavLink
         className="link-navbar"
         key={employee.id}
