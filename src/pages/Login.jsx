@@ -21,18 +21,20 @@ export default function Login() {
   function getEmployeeConnect(dataEmployees) {
 
     let userRole
+    let userId = auth.currentUser.uid
     let linkNavigate = "/management";
   
     for(const employee of dataEmployees) {
       if(auth.currentUser.uid === employee.uid) {
         linkNavigate = `/profile/${employee.id}`;
         userRole = "employee"
+        userId = employee.id
         break;
       }
       else userRole = "admin"
     }
     navigate(linkNavigate);
-    dispatch(getUserConnected({"connected": true, "role": userRole}));
+    dispatch(getUserConnected({"connected": true, "role": userRole, "userID": userId}));
   }
   
   async function getDataAfterLogin() {

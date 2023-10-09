@@ -12,25 +12,42 @@ export default function Navbar() {
   return (
     <nav className="left-side">
       {userConnect.role === "admin" &&(
-        <NavLink
+        <><NavLink
         className="link-navbar"
         to="/management">
             <span>Gestion</span>
             <img src={employees} alt="" className="icon-nav" />
         </NavLink>
+
+        {listEmployees.map(employee => (
+          <NavLink
+          className="link-navbar"
+          key={employee.id}
+          to={{
+            pathname: `/profile/${employee.id}`
+            }} >
+              <span>{employee.lastName} {employee.firstName}</span>
+              <img src={employe} alt="" className="icon-nav" />
+          </NavLink>
+        ))}
+
+        </>
+
       )}
       
-      {listEmployees.map(employee => (
-        <NavLink
-        className="link-navbar"
-        key={employee.id}
-        to={{
-          pathname: `/profile/${employee.id}`
-          }} >
-            <span>{employee.lastName} {employee.firstName}</span>
-            <img src={employe} alt="" className="icon-nav" />
-        </NavLink>
-      ))}
+      {/* {userConnect.role === "admin" &&(
+        (listEmployees.map(employee => (
+          <NavLink
+          className="link-navbar"
+          key={employee.id}
+          to={{
+            pathname: `/profile/${employee.id}`
+            }} >
+              <span>{employee.lastName} {employee.firstName}</span>
+              <img src={employe} alt="" className="icon-nav" />
+          </NavLink>
+        )))
+      )} */}
     </nav>
-)
+  )
 }

@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     connected: false,
-    role: ""
+    role: "",
+    userId: ""
 }
 
 export const userConnected = createSlice({
