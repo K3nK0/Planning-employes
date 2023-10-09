@@ -7,16 +7,19 @@ import { useSelector } from "react-redux"
 export default function Navbar() {
 
   const listEmployees = useSelector(state => state.listEmployees)
-  // console.log(listEmployees);
+  const userConnect = useSelector(state => state.userConnected)
 
   return (
     <nav className="left-side">
-      <NavLink
-      className="link-navbar"
-      to="/management">
-          <span>Gestion</span>
-          <img src={employees} alt="" className="icon-nav" />
-      </NavLink>
+      {userConnect.role === "admin" &&(
+        <NavLink
+        className="link-navbar"
+        to="/management">
+            <span>Gestion</span>
+            <img src={employees} alt="" className="icon-nav" />
+        </NavLink>
+      )}
+      
       {listEmployees.map(employee => (
         <NavLink
         className="link-navbar"

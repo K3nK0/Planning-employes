@@ -10,6 +10,7 @@ export const getEmployees = async (dispatch, setListEmployees) => {
   employees.forEach(employee => {
     getEventsEmployee(dispatch, addEventState, employee.id)
   })
+  return employees
   
 };
 

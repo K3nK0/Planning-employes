@@ -1,6 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = false
+const initialState = {
+    connected: false,
+    role: ""
+}
 
 export const userConnected = createSlice({
     name: "userConnected",

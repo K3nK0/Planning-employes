@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { signInWithEmailAndPassword } from "firebase/auth";
 import {auth} from "../config/firebase"
 
@@ -15,23 +15,24 @@ export default function Login() {
   const navigate = useNavigate()
 
   const userConnect = useSelector(state => state.userConnected)
-  const listEmployees = useSelector(state => state.listEmployees)
 
   const dispatch = useDispatch()
 
   function getEmployeeConnect(dataEmployees) {
 
+    let userRole
     let linkNavigate = "/management";
-    console.log("employe et auth", dataEmployees, auth.currentUser.uid);
   
-    for(const employee of listEmployees) {
+    for(const employee of dataEmployees) {
       if(auth.currentUser.uid === employee.uid) {
         linkNavigate = `/profile/${employee.id}`;
+        userRole = "employee"
         break;
       }
+      else userRole = "admin"
     }
     navigate(linkNavigate);
-    dispatch(getUserConnected(true));
+    dispatch(getUserConnected({"connected": true, "role": userRole}));
   }
   
   async function getDataAfterLogin() {
@@ -39,7 +40,6 @@ export default function Login() {
     try {
       const dataEmployees = await getEmployees(dispatch, setListEmployees);
       getEmployeeConnect(dataEmployees);
-
     } catch (error) {
       console.log(error);
     }
@@ -55,9 +55,9 @@ export default function Login() {
       e.preventDefault()
       try {
           await signInWithEmailAndPassword(auth, loginForm.email, loginForm.pwd)
-          .then(async (data) => {
+          .then((data) => {
             if(data.operationType === "signIn") {
-              await getDataAfterLogin()
+              getDataAfterLogin()
             }
           })
       } catch (error) {
@@ -67,7 +67,7 @@ export default function Login() {
 
   return (
     <>
-      {userConnect ? <Outlet /> : 
+      {userConnect.connected ? <Outlet /> : 
       <div className="modal modal-login">
         <form 
         onSubmit={handleSubmit}
