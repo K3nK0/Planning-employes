@@ -1,3 +1,5 @@
+import "../styles/login.css"
+
 import { useState } from "react"
 import { signInWithEmailAndPassword } from "firebase/auth";
 import {auth} from "../config/firebase"
@@ -13,6 +15,7 @@ import { setListEmployees } from "../features/listEmployees";
 export default function Login() {
 
   const navigate = useNavigate()
+  const [wrongConnection, setWrongConnection] = useState("")
 
   const userConnect = useSelector(state => state.userConnected)
 
@@ -59,11 +62,13 @@ export default function Login() {
           await signInWithEmailAndPassword(auth, loginForm.email, loginForm.pwd)
           .then((data) => {
             if(data.operationType === "signIn") {
+              setWrongConnection("")
               getDataAfterLogin()
             }
           })
       } catch (error) {
           console.log(error);
+          setWrongConnection("Mauvais mail/mot de passe")
       }
     }
 
@@ -101,6 +106,8 @@ export default function Login() {
               maxLength={30}
               />
           </div>
+
+          <p className="txt-wrong-connection">{wrongConnection}</p>
 
           <button className="btn-send">Connection</button>
 
