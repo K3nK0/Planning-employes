@@ -2,3 +2,16 @@
     color: red;
     margin-bottom: 10px;
 }
+
+.btn-forgot-password {
+    margin-top: 16px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: var(--anthracite);
+}
+
+.btn-forgot-password:hover {
+    color: var(--anthraciteHover);
+    font-weight: 600;
+}

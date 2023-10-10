@@ -11,11 +11,15 @@ import { useNavigate } from "react-router-dom";
 import { getUserConnected } from "../features/userConnected";
 import { getEmployees } from "../utils/getEmpoyees";
 import { setListEmployees } from "../features/listEmployees";
+import { createPortal } from "react-dom";
+
+import ModalForgotPassword from "../components/ModalForgotPassword";
 
 export default function Login() {
 
   const navigate = useNavigate()
   const [wrongConnection, setWrongConnection] = useState("")
+  const [showModalForgotPassword, setShowModalForgotPassword] = useState(false)
 
   const userConnect = useSelector(state => state.userConnected)
 
@@ -111,8 +115,18 @@ export default function Login() {
 
           <button className="btn-send">Connection</button>
 
+          <button 
+          type="button"
+          className="btn-forgot-password"
+          onClick={() => setShowModalForgotPassword(true)}
+          >
+            Mot de passe oublié
+          </button>
+
         </form>
       </div>}
+
+      {showModalForgotPassword && createPortal(<ModalForgotPassword closeModalForgotPassword={() => setShowModalForgotPassword(false)} />, document.body)}
     </>
   )
 }
